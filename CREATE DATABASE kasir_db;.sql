@@ -4,3 +4,4 @@ CREATE TABLE users (
     username VARCHAR(50) UNIQUE,
     password 
 )
+CREATE
