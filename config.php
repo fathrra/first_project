@@ -2,7 +2,7 @@
 session_start();
 
 $host= 'localhost';
-$user = 'db_user';
+$user = 'root';
 $pass = '';
 $dbname = 'kasir_db';
 
