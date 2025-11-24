@@ -1,12 +1,12 @@
 <?php 
 session_start();
 
-$DB_HOST = 'localhost';
-$DB_USER = 'db_user';
-$DB_PASS = '';
-$DB_NAME = 'kasir_db';
+$host= 'localhost';
+$user = 'db_user';
+$pass = '';
+$dbname = 'kasir_db';
 
-$conn = new mysqli($DB_HOST, $DB_USER, $DB_PASS, $DB_NAME);
+$conn = new mysqli($host, $user, $pass, $dbname);
 
 if ($conn->connect_error)
     die("Koneksi gagal: " . $conn->connect_error);
