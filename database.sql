@@ -1,13 +1,8 @@
 CREATE DATABASE kasir_db;
-CREATE TABLE users (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(50) UNIQUE,
-    password(59),
-    role ENUM('admin', 'kasir')
-);
+
 CREATE TABLE kategori (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    nama_kategori VARCHAR(100),
+    nama_kategori VARCHAR(100)
 );
 CREATE TABLE produk (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -36,4 +31,4 @@ CREATE TABLE transaksi_detail(
     subtotal DECIMAL(12,2) NOT NULL,
     FOREIGN KEY (transaksi_id) REFERENCES transaksi(id) ON DELETE CASCADE,
     FOREIGN KEY (produk_id) REFERENCES produk(id) ON DELETE SET NULL
-)
+);
