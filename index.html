@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard Toko Sepeda</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;1,600;1,700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="app">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <ul>
+      <li>🏠</li>
+      <li>🚲</li>
+      <li>📊</li>
+      <li>⚙️</li>
+    </ul>
+  </aside>
+
+  <!-- ISI DASHBOARD -->
+  <div class="container">
+
+
+  <!-- HEADER -->
+  <div class="header">
+    <h3 class="hal">UTAMA</h3>
+    <div class="date">SENIN - 1-1-2026</div>
+    
+  </div>
+  
+  <!-- CARD STATISTIK -->
+  <div class="cards">
+    
+    <div class="card blue">
+      <div class="card-content">
+        <p>Terjual</p>
+        <h2>30</h2>
+      </div>
+    </div>
+    
+    <div class="card orange">
+      <div class="card-content">
+        <p>Pendapatan</p>
+        <h2>Rp.1.000.000</h2>
+        <span>50% lebih baik</span>
+      </div>
+    </div>
+    
+    <div class="card green">
+      <div class="card-content">
+        <p>Kemarin</p>
+        <h2>-</h2>
+      </div>
+    </div>
+    
+  </div>
+  
+  <!-- TABEL -->
+   <div class="table-wrapper">
+
+     <div class="table-box">
+       
+       <!-- PEMBELI 1 -->
+       <div class="buyer">
+         <div class="buyer-header">
+           <span class="buyer-name">fathur</span>
+          </div>
+          
+          <table>
+            <thead>
+              <tr>
+                <th>no.</th>
+                <th>merk.</th>
+                <th>tipe.</th>
+                <th>harga.</th>
+                <th>jumlah.</th>
+                <th>total.</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Polygon</td>
+                <td>MTB</td>
+                <td>Rp 1.000</td>
+                <td>2</td>
+                <td>Rp 2.000</td>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>Polygon</td>
+                <td>MTB</td>
+                <td>Rp 1.000</td>
+                <td>2</td>
+                <td>Rp 2.000</td>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>Polygon</td>
+                <td>MTB</td>
+                <td>Rp 1.000</td>
+                <td>2</td>
+                <td>Rp 2.000</td>
+              </tr>
+            </tbody>
+          </table>
+          
+          <div class="buyer-total">
+            <span>total</span>
+            <strong>Rp.2.000</strong>
+          </div>
+        </div>
+        
+        <!-- PEMBELI 2 -->
+        <div class="buyer">
+          <div class="buyer-header">
+            <span class="buyer-name">fathur</span>
+          </div>
+          
+          <table>
+            <thead>
+              <tr>
+                <th>no.</th>
+                <th>merk.</th>
+                <th>tipe.</th>
+                <th>harga.</th>
+                <th>jumlah.</th>
+                <th>total.</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Polygon</td>
+                <td>MTB</td>
+                <td>Rp 1.000</td>
+                <td>2</td>
+                <td>Rp 2.000</td>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>Polygon</td>
+                <td>MTB</td>
+                <td>Rp 1.000</td>
+                <td>2</td>
+                <td>Rp 2.000</td>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>Polygon</td>
+                <td>MTB</td>
+                <td>Rp 1.000</td>
+                <td>2</td>
+                <td>Rp 2.000</td>
+              </tr>
+            </tbody>
+          </table>
+          
+          <div class="buyer-total">
+            <span>total</span>
+            <strong>Rp.2.000</strong>
+          </div>
+        </div>
+        
+        <button class="btn-add" onclick="openModal()">+ Input Data</button>
+        
+      </div>
+    </div>
+      
+      
+    </div>
+    <div class="modal-overlay" id="modal">
+      <div class="modal-box">
+        <h2>Input Data Pembelian</h2>
+        
+        <input type="text" placeholder="Nama Pembeli">
+        <input type="text" placeholder="Merk">
+        <input type="text" placeholder="Tipe">
+        <input type="number" placeholder="Harga">
+        <input type="number" placeholder="Jumlah">
+        
+        <div class="modal-action">
+          <button class="btn-cancel" onclick="closeModal()">Batal</button>
+          <button class="btn-save">Simpan</button>
+        </div>
+      </div>
+    </div>
+    <script>
+      function openModal() {
+        document.getElementById('modal').style.display = 'flex';
+      }
+      
+      function closeModal() {
+        document.getElementById('modal').style.display = 'none';
+      }
+      </script>
+
+
+</body>
+</html>
