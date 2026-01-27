@@ -1,28 +1,108 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8">
   <title>Data Barang</title>
-  <link rel="stylesheet" href="barang.css">
-   <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;1,600;1,700&display=swap" rel="stylesheet">
+   <link rel="stylesheet" href="barang.css"> 
+  <style>
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f5f5, #ececec);
+  margin: 0; 
+  padding: 0;
+}
+
+/* LAYOUT */
+.app {
+  display: flex;
+  padding: 20px;
+  gap: 30px;
+}
+
+    /* Tambahan CSS modal agar muncul di atas layout lama */
+    .modal {
+        display: none;             /* default hidden */
+        position: fixed;           /* tetap di layar */
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0,0,0,0.5);
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        
+    }
+
+    .modal-box {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        width: 300px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+
+    .modal-box input {
+        width: 100%;
+        padding: 7px;
+        margin-bottom: 10px;
+    }
+
+    .modal-action {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    table tbody tr { transition: opacity 0.3s ease; }
+  </style>
 </head>
 <body>
-
 <div class="app">
 
   <!-- SIDEBAR -->
-  <aside class="sidebar">
-    <div class="dot"></div>
-    <div class="dot"></div>
-  </aside>
+<!-- SIDEBAR BARU -->
+<div class="sidebar">
+  <div class="logo"></div>
 
+  <ul class="nav">
+    <li class="nav-item " data-link="index.html">
+      <span class="icon">🏠</span>
+      <span class="text">Dashboard</span>
+    </li>
+    <li class="nav-item" data-link="diagram.html">
+      <span class="icon">📈</span>
+      <span class="text">Diagram</span>
+    </li>
+    <li class="nav-item active" data-link="data_barang.html">
+      <span class="icon">📦</span>
+      <span class="text">Produk</span>
+    </li>
+
+    <div class="nav-indicator"></div>
+  </ul>
+</div>
+
+
+   
   <!-- KONTEN -->
   <main class="content">
 
     <!-- BUTTON -->
     <div class="top-action">
-      <button class="btn-green">Daftar harga</button>
+      <button class="btn-green">Daftar barang</button>
     </div>
+
+    <!-- Tombol Tambah Barang -->
+    <button class="btn-green" onclick="openModal()">+ Tambah Barang</button>
 
     <!-- TABLE -->
     <div class="table-box">
@@ -36,129 +116,105 @@
           </tr>
         </thead>
         <tbody>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
-          <tr><td></td><td></td><td></td><td></td></tr>
 
-        </tbody>
+</tbody>
       </table>
     </div>
 
   </main>
 </div>
 
+<!-- MODAL (letakkan di dalam body, tetap di akhir supaya z-index muncul) -->
+<div class="modal" id="modal">
+  <div class="modal-box">
+    <h3>Tambah Barang</h3>
+    <form id="formTambahBarang">
+      <input type="text" name="nama" placeholder="Merk barang" required>
+      <input type="text" name="tipe" placeholder="Tipe barang" required>
+      <input type="number" name="harga" placeholder="Harga" required>
+      <div class="modal-action">
+        <button type="submit" class="btn-green">Simpan</button>
+        <button type="button" onclick="closeModal()">Batal</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+function openModal() { document.getElementById('modal').style.display = 'flex'; }
+function closeModal() { document.getElementById('modal').style.display = 'none'; }
+
+/* AJAX Tambah Barang */
+document.getElementById('formTambahBarang').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const formData = new FormData(this);
+
+    fetch('tambah_barang.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(res => res.json())
+    .then(res => {
+        if(res.status === 'success') {
+            const tbody = document.querySelector('table tbody');
+            const row = document.createElement('tr');
+            const no = tbody.querySelectorAll('tr').length + 1;
+
+            row.innerHTML = `
+                <td>${no}</td>
+                <td>${res.data.nama}</td>
+                <td>${res.data.tipe}</td>
+                <td>Rp ${Number(res.data.harga).toLocaleString()}</td>
+            `;
+            row.style.opacity = 0;
+            tbody.appendChild(row);
+            setTimeout(()=>row.style.opacity=1,50);
+
+            this.reset();
+            closeModal();
+        } else {
+            alert('Gagal menambahkan barang: '+res.message);
+        }
+    })
+    .catch(err => console.error(err));
+});
+const items = document.querySelectorAll('.nav-item');
+const indicator = document.querySelector('.nav-indicator');
+
+function moveIndicator(el){
+  indicator.style.top = el.offsetTop + 'px';
+}
+
+items.forEach(item => {
+  item.addEventListener('click', (e) => {
+    
+    // 1. Cek: Kalau tombol yang dipencet adalah halaman yang sedang aktif, jangan lakukan apa-apa.
+    if(item.classList.contains('active')) return;
+
+    // 2. Jalankan Animasi UI (Pindah kelas active & geser kotak oren)
+    items.forEach(i => i.classList.remove('active'));
+    item.classList.add('active');
+    moveIndicator(item);
+
+    // 3. INI KUNCINYA: Tahan perpindahan halaman!
+    const link = item.getAttribute('data-link');
+    if(link) {
+      // Kita beri jeda 400ms (0.4 detik).
+      // Karena di CSS kamu 'transition: 0.35s', jadi kita tunggu sampai animasi selesai.
+      setTimeout(() => {
+        window.location.href = link;
+      }, 350); 
+    }
+  });
+});
+
+
+
+
+// posisi awal
+const activeItem = document.querySelector('.nav-item.active');
+if(activeItem) moveIndicator(activeItem);
+
+</script>
 </body>
 </html>

@@ -12,29 +12,128 @@
   padding: 20px;
 }
  .sidebar {
-  width: 80px;
-  min-height: 100vh;
-  border-radius: 20px;
-
-  background: rgba(255,255,255,0.35);
-  backdrop-filter: blur(6px);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-
   display: flex;
   justify-content: center;
   padding-top: 30px;
 }
 
-.sidebar ul {
+/* NAV LIST */
+.sidebar .nav {
   list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 90px;
+  position: relative;
 }
 
-.sidebar li {
-  margin: 25px 0;
-  font-size: 20px;
-  cursor: pointer;
+/* ITEM */
+.sidebar .nav-item {
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 2;
 }
 
+.sidebar .nav-item a {
+  color: #555;
+  font-size: 22px;
+  text-decoration: none;
+  z-index: 3;
+}
+
+/* ACTIVE ICON */
+.sidebar .nav-item.active a {
+  color: #2196f3;
+}
+
+/* INDICATOR */
+.nav-indicator {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 56px;
+  height: 56px;
+  background: #fff;
+  border-radius: 50%;
+  transform: translateX(-50%);
+  transition: 0.35s ease;
+  z-index: 1;
+}
+
+/* MOVE INDICATOR */
+.sidebar .nav-item:nth-child(1).active ~ .nav-indicator { top: 0; }
+.sidebar .nav-item:nth-child(2).active ~ .nav-indicator { top: 70px; }
+.sidebar .nav-item:nth-child(3).active ~ .nav-indicator { top: 140px; }
+.sidebar .nav-item:nth-child(4).active ~ .nav-indicator { top: 210px; }
+.sidebar .nav-item:nth-child(5).active ~ .nav-indicator { top: 280px; }
+/* ICON DEFAULT */
+.sidebar .nav-item a {
+  font-size: 22px;
+  color: #777;
+  transition: 0.35s ease;
+}
+
+/* ICON ACTIVE MASUK KE BULAT */
+.sidebar .nav-item.active a {
+  color: #2196f3;
+  transform: translateY(-6px) scale(1.15);
+}
+
+/* ICON NON ACTIVE TURUN */
+.sidebar .nav-item:not(.active) a {
+  opacity: 0.6;
+  transform: scale(0.95);
+}
+
+/* BULATAN */
+.nav-indicator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ICON DI ATAS BULAT */
+.sidebar .nav-item.active {
+  z-index: 5;
+}
+.sidebar .nav-item a {
+  transition: transform 0.35s cubic-bezier(.68,-0.55,.27,1.55),
+              color 0.25s ease,
+              opacity 0.25s ease;
+}
+/* =========================
+   WARNA ACTIVE / NON ACTIVE
+========================= */
+
+/* ICON DEFAULT (NON ACTIVE) */
+.sidebar .nav-item a {
+  color: #9aa0a6;          /* abu lembut */
+  transition: 0.35s ease;
+}
+
+/* ITEM ACTIVE */
+.sidebar .nav-item.active a {
+  color: #ffffff;          /* icon putih */
+  transform: translateY(-6px) scale(1.15);
+}
+
+/* NON ACTIVE LEBIH PUDAR */
+.sidebar .nav-item:not(.active) a {
+  opacity: 0.45;
+}
+
+/* BULATAN ACTIVE */
+.nav-indicator {
+  background: linear-gradient(135deg, #42a5f5, #1e88e5);
+  box-shadow: 0 10px 25px rgba(33,150,243,.45);
+   transition: top 0.35s ease;
+}
+
+/* OPTIONAL: HOVER */
+.sidebar .nav-item:hover a {
+  opacity: 0.85;}
 /* BACKGROUND */
 body {
   background: #EDEBE9;

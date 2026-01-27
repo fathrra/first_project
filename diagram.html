@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+   <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;1,600;1,700&display=swap" rel="stylesheet">
+  <title>Dashboard Statistik</title>
+  
+  <style>
+    * { box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: #f2f2f2;
+      display: flex;
+    }
+
+    /* SIDEBAR */
+/* ===== SIDEBAR MODERN ===== */
+/* ===== SIDEBAR FIX RAPIH ===== */
+.sidebar {
+  width: 90px;
+  height: calc(100vh - 40px);
+  margin: 20px;
+  border-radius: 30px;
+  background: rgba(255,255,255,0.45);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.18);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* LOGO */
+.logo {
+  font-size: 28px;
+  margin: 25px 0 35px;
+}
+
+/* NAV RESET */
+.nav {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+}
+
+/* ITEM */
+.nav-item {
+  width: 60px;
+  height: 60px;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #666;
+  position: relative;
+  z-index: 2;
+   transition: all 0.35s cubic-bezier(.4,0,.2,1);
+}
+
+/* ICON */
+.nav-item .icon {
+  font-size: 24px;
+  line-height: 1;
+}
+
+/* TEXT (DISABLE DULU BIAR GAK NGACO) */
+.nav-item .text {
+  display: none;
+}
+
+/* ACTIVE */
+.nav-item.active {
+  color: #fff;
+}
+
+/* INDICATOR (INI KUNCI UTAMA) */
+.nav-indicator {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border-radius: 18px;
+  background: linear-gradient(135deg,#ff9800,#ff6f00);
+  border-radius: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 0;
+  z-index: 1;
+  transition: top 0.35s cubic-bezier(.4,0,.2,1);
+  box-shadow: 0 14px 28px rgba(255,152,0,0.55);
+  z-index: 1;
+}
+
+
+    /* MAIN */
+    .main {
+      flex: 1;
+      padding: 30px;
+      display: grid;
+      grid-template-columns: 2.2fr 1fr;
+      gap: 30px;
+    }
+
+    .left {
+      display: grid;
+      grid-template-rows: auto auto auto;
+      gap: 25px;
+    }
+
+    /* BADGE */
+    .badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 18px;
+  background: linear-gradient(135deg,#6bdc6b,#2bbf2b);
+  color: #fff;
+  border-radius: 999px;
+  font-weight: 600;
+  line-height: 1;
+  box-shadow: 0 8px 20px rgba(0,0,0,.15);
+
+  width: fit-content;     /* 🔑 INI KUNCINYA */
+  white-space: nowrap;    /* biar teks ga melebar */
+}
+
+    /* CARD */
+    .card {
+      background: #f6f4f2;
+      border-radius: 26px;
+      box-shadow: 0 20px 35px rgba(0,0,0,.18);
+      overflow: hidden;
+    }
+
+    .card-header {
+      padding: 16px 24px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .blue { background: linear-gradient(135deg,#00b0ff,#1a3dbb); }
+    .orange { background: linear-gradient(135deg,#ffc107,#ff7a00); }
+    .green { background: linear-gradient(135deg,#4caf50,#2e7d32); }
+
+    .card-body { padding: 24px; }
+
+    /* STAT CHART */
+    .chart-box { height: 260px; position: relative; }
+
+    .chart-wrapper {
+      height: 100%;
+      position: relative;
+    }
+
+    .chart-info {
+      position: absolute;
+      top: 20px;
+      left: 30px;
+      z-index: 2;
+    }
+
+    .chart-info h2 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 600;
+      color: #444;
+    }
+
+    .chart-info .income {
+      margin: 6px 0;
+      font-size: 28px;
+      font-weight: 700;
+      color: #1a3dbb;
+    }
+
+    .chart-info .trend {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .trend.up { color: #2e7d32; }
+    .trend.down { color: #c62828; }
+
+    /* SMALL STATS */
+    .stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 25px;
+    }
+
+    .stat-value { font-size: 32px; font-weight: 700; color: #666; }
+    .stat-note { font-size: 13px; color: #777; }
+
+    /* DONUT */
+    .donut {
+      
+      grid-template-columns: 300px 1fr;
+      align-items: center;
+      padding-left: 40px;
+      display: flex;  
+      gap: 20px;
+    }
+
+    .donut-chart {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .donut-chart canvas {
+      max-width: 120px;
+      max-height: 120px;
+    }
+
+    .legend {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 14px;
+    }
+
+    .legend div {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+      color: #555;
+    }
+
+    .legend div { margin-bottom: 12px; font-weight: 600; color: #666; }
+
+    /* RIGHT LIST */
+    .list {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+/* 🔒 KUNCI: pendekin cuma baris paling bawah */
+.left > .stats:last-child {
+  align-items: stretch;
+}
+
+.left > .stats:last-child .card {
+  height: 240px;   /* UBAH ANGKA INI SESUKA KAMU */
+}
+.left > .stats:last-child .card .card-body {
+  height: calc(100% - 56px); /* tinggi header */
+  overflow: hidden;
+}
+  
+.list .card-body {
+  flex: 1;
+  overflow-y: auto;
+}
+/* TERLARIS TABLE STYLE */
+.list-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.list-table thead th {
+  text-align: left;
+  padding: 14px 18px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #777;
+  border-bottom: 1px solid #ddd;
+}
+
+.list-table tbody tr {
+  transition: background .2s ease;
+}
+
+.list-table tbody tr:hover {
+  background: rgba(0,0,0,.03);
+}
+
+.list-table td {
+  padding: 14px 18px;
+  font-weight: 600;
+  color: #555;
+  border-bottom: 1px solid #eee;
+}
+.list {
+  height: auto;
+}
+
+.list .card-body {
+  flex: unset;
+}
+/* TERLARIS STYLE MIRIP CONTOH */
+.list-items {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.list-items .item {
+  padding: 16px 24px;
+  font-weight: 700;
+  color: #777;
+  border-bottom: 1px solid #d9d9d9;
+  letter-spacing: .3px;
+}
+
+.list-items .item:last-child {
+  border-bottom: none;
+}
+
+
+
+    @media(max-width: 1024px){
+      .main { grid-template-columns: 1fr; }
+      .stats { grid-template-columns: 1fr; }
+      .donut { grid-template-columns: 1fr; gap: 20px; }
+    }
+/* HISTORY PENJUALAN */
+  #riwayatTransaksi {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 180px;
+  overflow-y: auto;
+}
+
+.riwayatTransaksi {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: 600;
+  color: #555;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 6px;
+}
+
+.riwayatTransaksi span:last-child {
+  color: #ff7a00;
+}
+
+  </style>
+</head>
+<body>
+
+<!-- SIDEBAR BARU -->
+<div class="sidebar">
+  <div class="logo"></div>
+
+  <ul class="nav">
+    <li class="nav-item " data-link="index.html">
+      <span class="icon">🏠</span>
+      <span class="text">Dashboard</span>
+    </li>
+    <li class="nav-item active" data-link="diagram.html">
+      <span class="icon">📈</span>
+      <span class="text">Diagram</span>
+    </li>
+    <li class="nav-item" data-link="data_barang.html">
+      <span class="icon">📦</span>
+      <span class="text">Produk</span>
+    </li>
+
+    <div class="nav-indicator"></div>
+  </ul>
+</div>
+
+
+<div class="main">
+
+  <!-- LEFT COLUMN -->
+  <div class="left">
+
+    <span class="badge">Statistik</span>
+
+    <!-- LINE CHART -->
+    <div class="card">
+      <div class="card-header blue">Pendapatan per Bulan</div>
+      <div class="card-body chart-box">
+        <canvas id="lineChartKeuntungan"></canvas>
+      </div>
+    </div>
+
+    <!-- BULAN INI & BULAN KEMARIN -->
+    <div class="stats">
+      <div class="card">
+        <div class="card-header orange">Bulan ini</div>
+        <div class="card-body">
+          <div class="stat-value" id="bulanIniValue">Rp0</div>
+          <hr />
+          <div class="stat-note" id="bulanIniTrend">-</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header green">Bulan kemarin</div>
+        <div class="card-body">
+          <div class="stat-value" id="bulanKemarinValue">Rp0</div>
+          <hr />
+          <div class="stat-note" id="bulanKemarinTrend">-</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TERJUAL & CARD BARU -->
+    <div class="stats">
+      <div class="card">
+        <div class="card-header blue">Terjual</div>
+        <div class="card-body donut">
+          <canvas id="donutChart"></canvas>
+          <div class="legend" id="donutLegend"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header orange">Card Baru</div>
+        <div class="card-body" id="riwayatTransaksi">
+          <div style="display:flex; justify-content:space-between; margin-bottom:12px;" id="riwayatTransaksi">
+            
+          </div>
+         
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- RIGHT COLUMN (TERLARIS) -->
+  <div class="card list">
+    <div class="card-header orange">Terlaris</div>
+    <div class="card-body list-items" id="terlarisList"></div>
+  </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+let donutChart;
+let lineChartKeuntungan = null;
+
+async function loadKeuntunganChart(){
+  try {
+    const res = await fetch('api/keuntungan.php');
+    const json = await res.json();
+
+    const dataKeuntungan = json.data || Array(12).fill(0);
+
+    // ====== 🔥 SINKRON CARD DARI CHART ======
+    const now = new Date();
+    const bulanSekarangIndex = (now.getMonth() + 11) % 12; 
+    // karena chart kamu dimulai dari FEB
+
+    const bulanKemarinIndex =
+      bulanSekarangIndex === 0 ? 11 : bulanSekarangIndex - 1;
+
+    const totalBulanIni = dataKeuntungan[bulanSekarangIndex] || 0;
+    const totalBulanKemarin = dataKeuntungan[bulanKemarinIndex] || 0;
+
+    document.getElementById('bulanIniValue').textContent =
+      `Rp ${totalBulanIni.toLocaleString()}`;
+
+    document.getElementById('bulanKemarinValue').textContent =
+      `Rp ${totalBulanKemarin.toLocaleString()}`;
+
+    const trend =
+      totalBulanKemarin === 0
+        ? 0
+        : ((totalBulanIni - totalBulanKemarin) / totalBulanKemarin) * 100;
+
+    document.getElementById('bulanIniTrend').textContent =
+      trend >= 0
+        ? `▲ ${trend.toFixed(1)}% dari bulan kemarin`
+        : `▼ ${Math.abs(trend).toFixed(1)}% dari bulan kemarin`;
+
+    document.getElementById('bulanKemarinTrend').textContent =
+      trend >= 0
+        ? `▼ ${Math.abs(trend).toFixed(1)}% dari bulan sekarang`
+        : `▲ ${Math.abs(trend).toFixed(1)}% dari bulan sekarang`;
+
+    // ====== LINE CHART ======
+    const ctx = document
+      .getElementById('lineChartKeuntungan')
+      .getContext('2d');
+
+    if(!lineChartKeuntungan){
+      lineChartKeuntungan = new Chart(ctx,{
+        type:'line',
+        data:{
+          labels:['FEB','MAR','APR','MEI','JUN','JUL','AGU','SEP','OKT','NOV','DES','JAN'],
+          datasets:[{
+            data:dataKeuntungan,
+            fill:true,
+      tension:.4,
+      backgroundColor:'rgba(0,176,255,.25)',
+      borderColor:'#1a73e8',
+      borderWidth:3,
+      pointRadius:5,
+      pointHoverRadius:7,
+      pointBackgroundColor:'#fff',
+      pointBorderWidth:3,
+      pointBorderColor:'#1a73e8'
+          }]
+        },
+        options:{
+    responsive:true,
+    maintainAspectRatio:false,
+    plugins:{
+      legend:{display:false},
+      tooltip:{
+        backgroundColor:'#fff',
+        titleColor:'#333',
+        bodyColor:'#1a73e8',
+        borderColor:'#ddd',
+        borderWidth:1,
+        padding:12,
+        displayColors:false,
+        callbacks:{
+          label:(ctx)=>` $${ctx.parsed.y.toFixed(2)}`
+        }
+      }
+    },
+    scales:{
+      x:{
+        grid:{display:false},
+        ticks:{color:'#999',font:{weight:'600'}}
+      },
+      y:{
+        grid:{color:'rgba(0,0,0,.05)'},
+        ticks:{color:'#999',callback:v=>`Rp ${v}`}
+      }
+    }
+  }
+});
+
+    } else {
+      lineChartKeuntungan.data.datasets[0].data = dataKeuntungan;
+      lineChartKeuntungan.update();
+    }
+
+  } catch(err){
+    console.error('ERROR loadKeuntunganChart:', err);
+  }
+}
+
+
+
+async function loadChartsRealtime() {
+  try {
+    // --- AMBIL DATA TRANSAKSI ---
+    const res = await fetch('api/transaksi.php');
+    const data = await res.json();
+    if(!data.data || !Array.isArray(data.data)) return;
+    const transaksi = data.data;
+
+    // --- AMBIL DATA PRODUK ---
+    const resProduk = await fetch('api/produk.php');
+    const produkData = await resProduk.json();
+    const produkList = produkData.data || [];
+
+    // --- FUNSI PARSE TANGGAL ---
+    function parseTanggal(tgl) {
+  if (!tgl) return null;
+
+  // potong jam
+  if (tgl.includes(' ')) {
+    tgl = tgl.split(' ')[0];
+  }
+
+  return new Date(tgl); // YYYY-MM-DD
+};
+
+
+    
+
+    
+
+    // --- TREND BULAN INI & BULAN KEMARIN ---
+   const now = new Date();
+const bulanIni = now.getMonth();
+const tahunIni = now.getFullYear();
+
+const bulanKemarin = bulanIni === 0 ? 11 : bulanIni - 1;
+const tahunKemarin = bulanIni === 0 ? tahunIni - 1 : tahunIni;
+
+const totalBulanIni = transaksi
+  .filter(t => {
+    const d = parseTanggal(t.created_at);
+    return d && d.getMonth() === bulanIni && d.getFullYear() === tahunIni;
+  })
+  .reduce((sum, t) => sum + Number(t.subtotal || 0), 0);
+
+const totalBulanKemarin = transaksi
+  .filter(t => {
+    const d = parseTanggal(t.created_at);
+    return d && d.getMonth() === bulanKemarin && d.getFullYear() === tahunKemarin;
+  })
+  .reduce((sum, t) => sum + Number(t.subtotal || 0), 0);
+
+
+    // --- DONUT CHART ---
+    const kategoriCount = {};
+    transaksi.forEach(t=>{
+      const p = produkList.find(p=>p.id_produk==t.produk_id);
+      const kategori = p ? p.kategori||p.nama : 'Lain-lain';
+      if(!kategoriCount[kategori]) kategoriCount[kategori]=0;
+      kategoriCount[kategori] += Number(t.qty||0);
+    });
+
+    const donutLabels = Object.keys(kategoriCount);
+    const donutData = Object.values(kategoriCount);
+
+    const colorPalette = ['#00b0ff','#ff7a00','#4caf50','#ff3d00','#8e24aa','#fbc02d','#009688','#e91e63','#673ab7','#795548'];
+    const donutColors = donutLabels.map((_,i)=>colorPalette[i % colorPalette.length]);
+
+    if(!donutChart){
+      donutChart = new Chart(document.getElementById('donutChart'), {
+        type:'doughnut',
+        data:{ labels: donutLabels, datasets:[{ data: donutData, backgroundColor: donutColors, borderWidth:0 }] },
+        options:{ cutout:'65%', plugins:{legend:{display:false}} }
+      });
+    } else {
+      donutChart.data.labels = donutLabels;
+      donutChart.data.datasets[0].data = donutData;
+      donutChart.data.datasets[0].backgroundColor = donutColors;
+      donutChart.update();
+    }
+
+    // --- LEGEND DONUT ---
+    const donutLegendEl = document.getElementById('donutLegend');
+    donutLegendEl.innerHTML='';
+    donutLabels.forEach((label,i)=>{
+      const div = document.createElement('div');
+      div.innerHTML = `<span style="display:inline-block;width:14px;height:14px;background:${donutColors[i]};margin-right:6px;"></span> ${label} (${donutData[i]})`;
+      donutLegendEl.appendChild(div);
+    });
+
+function timeAgo(dateString) {
+  const now = new Date();
+  const past = new Date(dateString);
+  const diff = Math.floor((now - past) / 1000);
+
+  if (diff < 60) return `${diff} detik`;
+  if (diff < 3600) return `${Math.floor(diff / 60)} menit`;
+  if (diff < 86400) return `${Math.floor(diff / 3600)} jam`;
+  return `${Math.floor(diff / 86400)} hari`;
+}
+
+fetch('api/riwayat_transaksi.php')
+  .then(res => res.json())
+  .then(res => {
+    const box = document.getElementById('riwayatTransaksi');
+
+    if (!res.data.length) {
+      box.innerHTML = `<div class="empty">Belum ada transaksi</div>`;
+      return;
+    }
+
+    let html = '';
+    res.data.forEach(item => {
+      html += `
+        <div class="history-item">
+          <span>
+            ${item.nama_user} membeli <b>${item.nama_produk}</b> (${item.qty})
+          </span>
+          <small>${timeAgo(item.created_at)} lalu</small>
+        </div>
+      `;
+    });
+
+    box.innerHTML = html;
+  });
+
+
+    // --- TERLARIS ---
+    const terlarisCount = {};
+    transaksi.forEach(t=>{
+      const p = produkList.find(p=>p.id_produk==t.produk_id);
+      const nama = p ? p.nama : 'Produk Lain';
+      if(!terlarisCount[nama]) terlarisCount[nama]=0;
+      terlarisCount[nama]+=Number(t.qty||0);
+    });
+
+    const sortedTerlaris = Object.entries(terlarisCount).sort((a,b)=>b[1]-a[1]).slice(0,10);
+    const terlarisEl = document.getElementById('terlarisList');
+    terlarisEl.innerHTML='';
+    sortedTerlaris.forEach(p=>{
+      const div = document.createElement('div');
+      div.className='item';
+      div.textContent = p[0];
+      terlarisEl.appendChild(div);
+    });dwda
+
+  } catch(err){
+    console.error("ERROR loadChartsRealtime:", err);
+  }
+}
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  loadChartsRealtime();
+  loadKeuntunganChart();
+  setInterval(() => {
+    loadChartsRealtime();
+    loadKeuntunganChart();
+  }, 5000);
+});
+
+const items = document.querySelectorAll('.nav-item');
+const indicator = document.querySelector('.nav-indicator');
+
+function moveIndicator(el){
+  indicator.style.top = el.offsetTop + 'px';
+}
+
+items.forEach(item => {
+  item.addEventListener('click', (e) => {
+    
+    // 1. Cek: Kalau tombol yang dipencet adalah halaman yang sedang aktif, jangan lakukan apa-apa.
+    if(item.classList.contains('active')) return;
+
+    // 2. Jalankan Animasi UI (Pindah kelas active & geser kotak oren)
+    items.forEach(i => i.classList.remove('active'));
+    item.classList.add('active');
+    moveIndicator(item);
+
+    // 3. INI KUNCINYA: Tahan perpindahan halaman!
+    const link = item.getAttribute('data-link');
+    if(link) {
+      // Kita beri jeda 400ms (0.4 detik).
+      // Karena di CSS kamu 'transition: 0.35s', jadi kita tunggu sampai animasi selesai.
+      setTimeout(() => {
+        window.location.href = link;
+      }, 200); 
+    }
+  });
+});
+
+// posisi awal
+const activeItem = document.querySelector('.nav-item.active');
+if(activeItem) moveIndicator(activeItem);
+
+
+
+</script>
+
+</body>
+</html>
