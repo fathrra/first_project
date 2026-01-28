@@ -68,7 +68,7 @@ body {
   color: #666;
   position: relative;
   z-index: 2;
-   transition: all 0.35s cubic-bezier(.4,0,.2,1);
+  transition: all 0.35s cubic-bezier(.4,0,.2,1);
 }
 
 /* ICON */
@@ -127,7 +127,7 @@ body {
   color: #374151;
 }
 .hal{
-   padding: 10px 28px;
+  padding: 10px 28px;
   border-radius: 999px;
   border: none;
   cursor: pointer;
@@ -139,7 +139,7 @@ body {
 }
 
 .date {
-   padding: 10px 28px;
+  padding: 10px 28px;
   border-radius: 999px;
   border: none;
   cursor: pointer;
@@ -148,7 +148,7 @@ body {
   color: #fff;
   font-weight: 600;
   box-shadow: 0 8px 20px rgba(76,175,80,0.6);
-   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .date:hover {
   transform: translateY(-3px);
@@ -163,11 +163,11 @@ body {
 }
 
 /* CARD BASE */
- .card {
+.card {
   position: relative;
   border-radius: 16px;
   overflow: hidden;
-   min-height: 180px;
+  min-height: 180px;
     transition: transform 0.35s ease, box-shadow 0.35s ease; 
 
   /* GLASS EFFECT */
@@ -319,8 +319,8 @@ tr.spacer td {
 
 /* BUTTON */
 .btn-add {
-   position: sticky;
-    bottom: 40px;        /* 🔑 INI YANG KURANG */
+  position: sticky;
+  bottom: 40px;        /* 🔑 INI YANG KURANG */
 
   width: 100%;          /* 🔑 ini kuncinya */
   margin-top: 25px;    /* jarak dari tabel */
@@ -426,8 +426,8 @@ tr.spacer td {
 
 <div class="app">
 
-  <!-- SIDEBAR -->
- <!-- SIDEBAR BARU -->
+<!-- SIDEBAR -->
+<!-- SIDEBAR BARU -->
 <div class="sidebar">
   <div class="logo"></div>
 
@@ -488,7 +488,7 @@ tr.spacer td {
   </div>
   
   <!-- TABEL -->
-   <div class="table-wrapper">
+  <div class="table-wrapper">
   <div class="table-box" id="tableBox">
 
     <!-- tabel transaksi akan dirender di sini -->
@@ -548,7 +548,6 @@ setTodayDate();
 
 
   async function loadDropdowns() {
-   
     // Load produk
     try {
       const resProduk = await fetch('api/produk.php');
@@ -579,8 +578,8 @@ setTodayDate();
 
 
   window.saveTransaction = async function () {
-   const today = new Date().toISOString().slice(0,10);
-    const userName = document.getElementById('userInput').value.trim();
+  const today = new Date().toISOString().slice(0,10);
+  const userName = document.getElementById('userInput').value.trim();
   
   
   console.log("KLIK SIMPAN");
@@ -601,7 +600,7 @@ setTodayDate();
         items: cart
       })
     });
- const data = await res.json();
+const data = await res.json();
     if (data.status) {
       alert("Transaksi berhasil disimpan!");
       cart = [];       // reset cart
